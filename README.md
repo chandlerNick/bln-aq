@@ -1,6 +1,10 @@
 # BLN-AQ
 
-A study concenring the interaction and spatio-temporal modeling of various features on the air quality of Berlin.
+A study concenring the interaction and spatio-temporal modeling of various features on the air quality of Berlin. 
+
+Kind of a continuation/deepening of the project [weather-forecasting](https://github.com/chandlerNick/BerlinWeatherTimeSeriesAnalysis) though the focus and data sources are different.
+
+Possibly relevant google doc (ideas) [doc](https://docs.google.com/document/d/1x_8cQbp-dP0IGlWhhMDtkfZPhZxMkqcLRv3YWlQfTs4/edit?tab=t.0)
 
 ### Goals
 - Model urban air pollution levels.
