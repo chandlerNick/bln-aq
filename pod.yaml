@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: aq-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: shared
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aq-data-download
+  namespace: nich1834
+spec:
+  containers:
+    - name: firstpod
+      image: debian
+      command: ["sleep", "infinity"]
+      volumeMounts:
+        - name: a
+          mountPath: /mnt/data
+  volumes:
+    - name: a
+      persistentVolumeClaim:
+        claimName: aq-data
+

@@ -1,5 +1,12 @@
 # BLN-AQ
 
+
+New plan - try to use spatio temporal gaussian process models to interpolate (probabilistically) between citizen science and official sensors for PM2.5 and PM10 particles
+
+Goal is to submit the poster somewhere and if there is enough content, a paper to DATA 2026.
+
+
+
 A study concenring the interaction and spatio-temporal modeling of various features on the air quality of Berlin. 
 
 Kind of a continuation/deepening of the project [weather-forecasting](https://github.com/chandlerNick/BerlinWeatherTimeSeriesAnalysis) though the focus and data sources are different.
