@@ -1,7 +1,7 @@
 # BLN-AQ
 
 
-New plan - try to use spatio temporal gaussian process models to interpolate (probabilistically) between citizen science and official sensors for PM2.5 and PM10 particles
+New plan - try to use spatio temporal gaussian process models to interpolate (probabilistically) between citizen science for PM2.5 and PM10 particles
 
 Goal is to submit the poster somewhere and if there is enough content, a paper to DATA 2026.
 

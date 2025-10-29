@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ==============================
 # CONFIGURATION
 # ==============================
-DATA_DIR = Path("data/csv_data_berlin")
+DATA_DIR = Path("/mnt/data/berlin-data")
 DATA_DIR.mkdir(exist_ok=True)
 
 SENSOR_COMMUNITY_URL = "https://data.sensor.community/static/v2/data.json"
@@ -44,28 +44,34 @@ for entry in data:
             lon = float(entry["location"]["longitude"])
             if in_berlin(lat, lon):
                 sensor_ids.add(entry["sensor"]["id"])
+    
     except (KeyError, ValueError):
         continue
 
-print(f"✅ Found {len(sensor_ids)} SDS011 sensors in Berlin.")
+print(f"Found {len(sensor_ids)} SDS011 sensors in Berlin.")
 
 # ==============================
 # FUNCTION TO DOWNLOAD + FILTER CSV
 # ==============================
 def download_and_filter(sensor_id, day):
     ds = day.strftime("%Y-%m-%d")
+    out_file = DATA_DIR / f"{ds}_sensor_{sensor_id}.csv"
+
+    # Skip if already downloaded
+    if out_file.exists():
+        print(f"Skipping existing {out_file}")
+        return
+
     url = f"{ARCHIVE_BASE}/{ds}/{ds}_{SENSOR_TYPE}_sensor_{sensor_id}.csv"
     try:
         df = pd.read_csv(url, sep=";")
         if not df.empty:
             df_filtered = df[["timestamp", "P1", "P2", "lat", "lon"]].copy()
             df_filtered["sensor_id"] = sensor_id
-            # Save filtered CSV
-            out_file = DATA_DIR / f"{ds}_sensor_{sensor_id}.csv"
             df_filtered.to_csv(out_file, index=False)
-            print(f"💾 Saved {out_file} ({len(df_filtered)} rows)")
+            print(f"Saved {out_file} ({len(df_filtered)} rows)")
     except Exception:
-        print(f"⚠️ Missing or failed CSV for sensor {sensor_id} on {ds}")
+        print(f"Missing or failed CSV for sensor {sensor_id} on {ds}")
 
 # ==============================
 # GENERATE TASKS
@@ -91,4 +97,5 @@ with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         if completed % 100 == 0:
             print(f"Progress: {completed}/{len(futures)} ({completed/len(futures)*100:.2f}%)")
 
-print("✅ All downloads complete.")
+print("All downloads complete.")
+
