@@ -1,0 +1,22 @@
+[project]
+name = "bln-aq"
+version = "0.1.0"
+description = "Berlin air quality analysis and modeling with GPytorch"
+authors = [
+    { name = "Chandler Nick", email = "you@example.com" }
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "numpy<2",
+    "pandas",
+    "polars",
+    "matplotlib",
+    "scikit-learn",
+    "jupyterlab",
+    "ipywidgets",
+    "folium",
+    "torch",
+    "gpytorch",
+    "pyarrow"
+]
