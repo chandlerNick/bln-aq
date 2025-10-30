@@ -18,5 +18,7 @@ dependencies = [
     "folium",
     "torch",
     "gpytorch",
-    "pyarrow"
+    "pyarrow",
+    "ipython",
+    "jupyter"
 ]
