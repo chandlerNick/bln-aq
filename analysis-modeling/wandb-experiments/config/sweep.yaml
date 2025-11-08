@@ -1,0 +1,37 @@
+# sweep.yaml
+program: run_experiment.py
+method: bayes
+metric:
+  name: val_loss
+  goal: minimize
+parameters:
+  learning_rate:
+    distribution: log_uniform_values
+    min: 1e-5
+    max: 1e-2
+  grid_size:
+    values: [16, 25, 36, 49]   # number of inducing points (perfect squares for grid)
+  inducing_strategy:
+    values: ["grid", "kmeans"]
+  batch_size:
+    values: [None, 512, 1024]  # None => full-batch
+  spatial_kernel:
+    values: ["Matern", "RBF"]
+  matern_nu:
+    values: [0.5, 1.5, 2.5]
+  temporal_kernel:
+    values: ["Periodic", "RBF"]
+  period_length:
+    distribution: uniform
+    min: 12.0
+    max: 48.0
+  kernel_combine:
+    values: ["sum", "product"]
+  learn_inducing:
+    values: [true, false]
+  patience:
+    values: [25, 50]
+  iterations:
+    value: 2000
+  log_interval:
+    value: 50
