@@ -1,0 +1,3 @@
+Training GPR: 100%|██████████████████████████████████████████████████████████████████████| 5000/5000 [01:13<00:00, 67.85it/s]
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/lively-silence-5_final.pt
+Final RMSE: 6.356, R²: -0.151

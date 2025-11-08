@@ -1,0 +1,102 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            xaamo7fpa23mcfeeqzhtzd5u5bx81d84:
+                codePath: analysis-modeling/wandb-experiments/run_experiment.py
+                codePathLocal: run_experiment.py
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "12.8"
+                disk:
+                    /:
+                        total: "589553541120"
+                        used: "441588252672"
+                email: njchandler2002@gmail.com
+                executable: /storage/bln-aq/.venv/bin/python3
+                git:
+                    commit: 44b2b921f7cc57197b93e2f6e5143220851e6868
+                    remote: https://github.com/chandlerNick/bln-aq.git
+                gpu: Tesla V100S-PCIE-32GB
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Volta
+                      cudaCores: 5120
+                      memoryTotal: "34359738368"
+                      name: Tesla V100S-PCIE-32GB
+                      uuid: GPU-4d1c2617-649d-40f1-9430-2c9ab3297b79
+                host: weatherts-6c75d475f6-75wz4
+                memory:
+                    total: "540579323904"
+                os: Linux-6.8.0-86-generic-x86_64-with-glibc2.36
+                program: /storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py
+                python: CPython 3.11.9
+                root: /storage/bln-aq/analysis-modeling/wandb-experiments
+                startedAt: "2025-11-08T14:20:38.531875Z"
+                writerId: xaamo7fpa23mcfeeqzhtzd5u5bx81d84
+        m:
+            - "1": train_loss
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": iteration
+              "6":
+                - 3
+              "7": []
+            - "1": val_loss
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": train_rmse
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": val_rmse
+              "5": 2
+              "6":
+                - 1
+                - 3
+              "7": []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 1
+                - 5
+                - 53
+                - 100
+            "2":
+                - 1
+                - 5
+                - 53
+                - 100
+            "3":
+                - 7
+                - 16
+            "4": 3.11.9
+            "5": 0.22.3
+            "12": 0.22.3
+            "13": linux-x86_64
+data_path:
+    value: ../../data/2024-citsci-pollutants-hourly.parquet
+grid_size:
+    value: 25
+iterations:
+    value: 5000
+learning_rate:
+    value: "1e-3"
+log_interval:
+    value: 25
+lookback_days:
+    value: 28
+patience:
+    value: 50
+spatial_test_frac:
+    value: 0.2
+temp_horizon_hours:
+    value: 1

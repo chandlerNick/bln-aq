@@ -20,5 +20,8 @@ dependencies = [
     "gpytorch",
     "pyarrow",
     "ipython",
-    "jupyter"
+    "jupyter",
+    "tqdm",
+    "wandb",
+    "pyyaml"
 ]

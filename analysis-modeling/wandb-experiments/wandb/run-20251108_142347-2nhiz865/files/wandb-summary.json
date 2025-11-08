@@ -1,0 +1,1 @@
+{"_step":0,"iteration":25,"_wandb":{"runtime":148},"train_loss":1.434459583508741,"train_rmse":12.518463134765625,"_runtime":148,"val_rmse":5.821444511413574,"_timestamp":1.762611927593664e+09,"learning_rate":0.001}

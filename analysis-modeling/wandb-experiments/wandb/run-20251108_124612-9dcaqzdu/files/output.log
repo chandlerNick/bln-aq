@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 89, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 66, in main
+    optimizer = torch.optim.Adam([
+                ^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/optim/adam.py", line 58, in __init__
+    if not 0.0 <= lr:
+           ^^^^^^^^^
+TypeError: '<=' not supported between instances of 'float' and 'str'

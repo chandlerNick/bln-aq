@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 89, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 77, in main
+    model, likelihood = train_model(
+                        ^^^^^^^^^^^^
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/train.py", line 37, in train_model
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, drop_last=False)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 394, in __init__
+    batch_sampler = BatchSampler(sampler, batch_size, drop_last)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/utils/data/sampler.py", line 335, in __init__
+    raise ValueError(
+ValueError: batch_size should be a positive integer value, but got batch_size=None

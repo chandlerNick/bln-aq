@@ -1,0 +1,40 @@
+{
+  "os":  "Linux-6.8.0-86-generic-x86_64-with-glibc2.36",
+  "python":  "CPython 3.11.9",
+  "startedAt":  "2025-11-08T14:17:55.157441Z",
+  "program":  "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py",
+  "codePath":  "analysis-modeling/wandb-experiments/run_experiment.py",
+  "codePathLocal":  "run_experiment.py",
+  "git":  {
+    "remote":  "https://github.com/chandlerNick/bln-aq.git",
+    "commit":  "44b2b921f7cc57197b93e2f6e5143220851e6868"
+  },
+  "email":  "njchandler2002@gmail.com",
+  "root":  "/storage/bln-aq/analysis-modeling/wandb-experiments",
+  "host":  "weatherts-6c75d475f6-75wz4",
+  "executable":  "/storage/bln-aq/.venv/bin/python3",
+  "cpu_count":  64,
+  "cpu_count_logical":  128,
+  "gpu":  "Tesla V100S-PCIE-32GB",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "589553541120",
+      "used":  "441587793920"
+    }
+  },
+  "memory":  {
+    "total":  "540579323904"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "Tesla V100S-PCIE-32GB",
+      "memoryTotal":  "34359738368",
+      "cudaCores":  5120,
+      "architecture":  "Volta",
+      "uuid":  "GPU-4d1c2617-649d-40f1-9430-2c9ab3297b79"
+    }
+  ],
+  "cudaVersion":  "12.8",
+  "writerId":  "x91idp0qxaqb6u9qbyykb41n85jjd46t"
+}

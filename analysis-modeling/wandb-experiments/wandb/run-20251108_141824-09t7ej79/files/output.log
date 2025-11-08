@@ -1,0 +1,87 @@
+cuda
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 88, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 76, in main
+    model, likelihood = train_model(
+                        ^^^^^^^^^^^^
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/train.py", line 55, in train_model
+    output = model(xb)
+             ^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/models/approximate_gp.py", line 114, in __call__
+    return self.variational_strategy(inputs, prior=prior, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/variational_strategy.py", line 272, in __call__
+    return super().__call__(x, prior=prior, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/_variational_strategy.py", line 347, in __call__
+    return super().__call__(
+           ^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/variational_strategy.py", line 203, in forward
+    L = self._cholesky_factor(induc_induc_covar)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/utils/memoize.py", line 76, in g
+    return _add_to_cache_ignore_args(self, cache_name, method(self, *args, **kwargs))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/variational_strategy.py", line 104, in _cholesky_factor
+    L = psd_safe_cholesky(to_dense(induc_induc_covar).type(_linalg_dtype_cholesky.value()))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/_linear_operator.py", line 2993, in to_dense
+    return obj.to_dense()
+           ^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/utils/memoize.py", line 59, in g
+    return _add_to_cache(self, cache_name, method(self, *args, **kwargs), *args, kwargs_pkl=kwargs_pkl)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 81, in to_dense
+    return (sum(linear_op.to_dense() for linear_op in self.linear_ops)).contiguous()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 81, in <genexpr>
+    return (sum(linear_op.to_dense() for linear_op in self.linear_ops)).contiguous()
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/utils/memoize.py", line 59, in g
+    return _add_to_cache(self, cache_name, method(self, *args, **kwargs), *args, kwargs_pkl=kwargs_pkl)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/lazy/lazy_evaluated_kernel_tensor.py", line 410, in to_dense
+    return self.evaluate_kernel().to_dense()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/utils/memoize.py", line 59, in g
+    return _add_to_cache(self, cache_name, method(self, *args, **kwargs), *args, kwargs_pkl=kwargs_pkl)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/lazy/lazy_evaluated_kernel_tensor.py", line 25, in wrapped
+    output = method(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/lazy/lazy_evaluated_kernel_tensor.py", line 355, in evaluate_kernel
+    res = self.kernel(
+          ^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 539, in __call__
+    super(Kernel, self).__call__(x1_, x2_, last_dim_is_batch=last_dim_is_batch, **params)
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 622, in forward
+    next_term = kern(x1, x2, diag=diag, **params)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 539, in __call__
+    super(Kernel, self).__call__(x1_, x2_, last_dim_is_batch=last_dim_is_batch, **params)
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/scale_kernel.py", line 109, in forward
+    orig_output = self.base_kernel.forward(x1, x2, diag=diag, last_dim_is_batch=last_dim_is_batch, **params)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/periodic_kernel.py", line 135, in forward
+    diff = self.covar_dist(x1_, x2_, diag=diag, last_dim_is_batch=True, **params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 357, in covar_dist
+    return dist_func(x1, x2, x1_eq_x2)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 59, in dist
+    res = sq_dist(x1, x2, x1_eq_x2=x1_eq_x2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 33, in sq_dist
+    x1_norm = x1.pow(2).sum(dim=-1, keepdim=True)
+              ^^^^^^^^^
+KeyboardInterrupt

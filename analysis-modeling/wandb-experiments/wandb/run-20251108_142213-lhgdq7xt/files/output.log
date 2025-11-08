@@ -1,0 +1,22 @@
+cuda
+Commencing training...
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 88, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 76, in main
+    model, likelihood = train_model(
+                        ^^^^^^^^^^^^
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/train.py", line 59, in train_model
+    optimizer.step()
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 517, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 82, in _use_grad
+    ret = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/optim/adam.py", line 247, in step
+    adam(
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/optim/optimizer.py", line 133, in maybe_fallback
+    @functools.wraps(func)
+
+KeyboardInterrupt

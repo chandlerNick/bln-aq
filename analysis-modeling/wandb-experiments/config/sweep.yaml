@@ -14,7 +14,7 @@ parameters:
   inducing_strategy:
     values: ["grid", "kmeans"]
   batch_size:
-    values: [None, 512, 1024]  # None => full-batch
+    values: [256, 512, 1024]
   spatial_kernel:
     values: ["Matern", "RBF"]
   matern_nu:
@@ -32,6 +32,6 @@ parameters:
   patience:
     values: [25, 50]
   iterations:
-    value: 2000
+    value: 200
   log_interval:
     value: 50

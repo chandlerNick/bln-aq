@@ -1,13 +1,14 @@
 # run_experiment.py
 import os
 import torch, wandb, yaml
-from src.data_utils import load_and_prepare_data, prepare_tensors
-from src.model import SpatioTemporalGP
-from src.train import train_model
-from src.evaluate import evaluate_model
+from data_utils import load_and_prepare_data, prepare_tensors
+from model import SpatioTemporalGP
+from train import train_model
+from evaluate import evaluate_model
 import gpytorch
 import numpy as np
 from sklearn.cluster import KMeans
+from pathlib import Path
 
 def make_inducing_points(strategy, grid_size, train_X_np, scaler_X, device, time_median=None):
     if strategy == "kmeans":
@@ -35,6 +36,7 @@ def main():
     cfg = wandb.config
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print(device)
 
     train_df, test_df = load_and_prepare_data(
         cfg['data_path'], cfg['lookback_days'], cfg['temp_horizon_hours'], cfg['spatial_test_frac']
@@ -66,7 +68,7 @@ def main():
     optimizer = torch.optim.Adam([
         {'params': model.parameters()},
         {'params': likelihood.parameters()}
-    ], lr=cfg['learning_rate'])
+    ], lr=float(cfg['learning_rate']))
 
     num_data = X_train_t.size(0)
     mll = gpytorch.mlls.VariationalELBO(likelihood, model, num_data=num_data)
@@ -78,9 +80,6 @@ def main():
     # evaluate
     rmse, r2 = evaluate_model(model, likelihood, X_test_t, y_test_t, scaler_y)
     wandb.log({"RMSE": rmse, "R2": r2})
-    # save final model
-    torch.save({'model_state': model.state_dict(), 'likelihood_state': likelihood.state_dict()}, "final_model.pt")
-    wandb.save("final_model.pt")
     print(f"Final RMSE: {rmse:.3f}, R²: {r2:.3f}")
 
     wandb.finish()

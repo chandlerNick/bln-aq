@@ -1,0 +1,51 @@
+cuda
+commence training
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 88, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 76, in main
+    model, likelihood = train_model(
+                        ^^^^^^^^^^^^
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/train.py", line 56, in train_model
+    output = model(xb)
+             ^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/models/approximate_gp.py", line 114, in __call__
+    return self.variational_strategy(inputs, prior=prior, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/variational_strategy.py", line 272, in __call__
+    return super().__call__(x, prior=prior, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/_variational_strategy.py", line 347, in __call__
+    return super().__call__(
+           ^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/variational/variational_strategy.py", line 232, in forward
+    MatmulLinearOperator(interp_term.transpose(-1, -2), middle_term @ interp_term),
+                                                        ~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/_linear_operator.py", line 2905, in __matmul__
+    return self.matmul(other)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/_linear_operator.py", line 1832, in matmul
+    _matmul_broadcast_shape(self.shape, other.shape)
+                            ^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/_linear_operator.py", line 2293, in shape
+    return self._size()
+           ^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 64, in _size
+    return torch.broadcast_shapes(*[lt.shape for lt in self.linear_ops])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/functional.py", line 108, in broadcast_shapes
+    result = torch._refs._broadcast_shapes(*shapes)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/_refs/__init__.py", line 421, in _broadcast_shapes
+    if guard_or_false(shape[idx] == common_shape[idx]):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 1400, in guard_or_false
+    return _guard_or(a, False)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 1370, in _guard_or
+    def _guard_or(a: BoolLikeType, default: bool) -> bool:
+
+KeyboardInterrupt

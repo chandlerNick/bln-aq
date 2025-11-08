@@ -1,0 +1,22 @@
+cuda
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 88, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 76, in main
+    model, likelihood = train_model(
+                        ^^^^^^^^^^^^
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/train.py", line 51, in train_model
+    for xb, yb in train_loader:
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 732, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 790, in _next_data
+    data = _utils.pin_memory.pin_memory(data, self._pin_memory_device)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/utils/data/_utils/pin_memory.py", line 93, in pin_memory
+    clone[i] = pin_memory(item, device)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/torch/utils/data/_utils/pin_memory.py", line 57, in pin_memory
+    return data.pin_memory(device)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: cannot pin 'torch.cuda.FloatTensor' only dense CPU tensors can be pinned

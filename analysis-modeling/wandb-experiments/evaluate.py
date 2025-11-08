@@ -9,7 +9,8 @@ def evaluate_model(model, likelihood, X_test, y_test, scaler_y, epsilon=1e-3):
     likelihood.eval()
 
     with torch.no_grad(), gpytorch.settings.fast_pred_var():
-        preds = likelihood(model(X_test))
+        X = X_test.to(next(model.parameters()).device)  # ensure input is on same device as model
+        preds = likelihood(model(X))
         mean = preds.mean.cpu().numpy()
         lower, upper = preds.confidence_region()
 

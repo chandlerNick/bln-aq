@@ -15,7 +15,7 @@ def load_and_prepare_data(path, lookback_days, temp_horizon_hours, spatial_test_
     # spatial split
     unique_locs = df_recent[['lat','lon']].drop_duplicates()
     num_test_locs = int(len(unique_locs) * spatial_test_frac)
-    test_locs = unique_locs.sample(n=num_test_locs, random_state=42)
+    test_locs = unique_locs.sample(n=num_test_locs, random_state=41)
 
     train_end = latest_time - pd.Timedelta(hours=temp_horizon_hours)
 
@@ -35,7 +35,7 @@ def load_and_prepare_data(path, lookback_days, temp_horizon_hours, spatial_test_
     return train_df, test_df
 
 
-def prepare_tensors(train_df, test_df, epsilon=1e-3, device='cpu'):
+def prepare_tensors(train_df, test_df, epsilon=1e-3, device='cuda'):
     X_train = train_df[['lat','lon','minutes_since_start']].values
     y_train = train_df['PM2_5'].values
     X_test = test_df[['lat','lon','minutes_since_start']].values

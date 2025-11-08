@@ -1,0 +1,3 @@
+Training GPR: 100%|██████████████████████████████████████████████████████████████████████| 5000/5000 [01:16<00:00, 65.01it/s]
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/swept-mountain-6_final.pt
+Final RMSE: 6.356, R²: -0.152

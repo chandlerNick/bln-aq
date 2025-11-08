@@ -1,0 +1,26 @@
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_setup.py:_flush():81] Current SDK version is 0.22.3
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_setup.py:_flush():81] Configure stats pid to 5175
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_setup.py:_flush():81] Loading settings from /root/.config/wandb/settings
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_setup.py:_flush():81] Loading settings from /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/settings
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_init.py:setup_run_log_directory():706] Logging user logs to /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/run-20251108_130405-dtsad16g/logs/debug.log
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_init.py:setup_run_log_directory():707] Logging internal logs to /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/run-20251108_130405-dtsad16g/logs/debug-internal.log
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_init.py:init():833] calling init triggers
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_init.py:init():838] wandb.init called with sweep_config: {}
+config: {'data_path': '../../data/2024-citsci-pollutants-hourly.parquet', 'lookback_days': 28, 'temp_horizon_hours': 1, 'spatial_test_frac': 0.2, 'learning_rate': '1e-3', 'iterations': 5000, 'patience': 50, 'grid_size': 25, 'log_interval': 25, '_wandb': {}}
+2025-11-08 13:04:05,358 INFO    MainThread:5175 [wandb_init.py:init():881] starting backend
+2025-11-08 13:04:05,567 INFO    MainThread:5175 [wandb_init.py:init():884] sending inform_init request
+2025-11-08 13:04:05,571 INFO    MainThread:5175 [wandb_init.py:init():892] backend started and connected
+2025-11-08 13:04:05,572 INFO    MainThread:5175 [wandb_init.py:init():962] updated telemetry
+2025-11-08 13:04:05,578 INFO    MainThread:5175 [wandb_init.py:init():986] communicating run to backend with 90.0 second timeout
+2025-11-08 13:04:06,198 INFO    MainThread:5175 [wandb_init.py:init():1033] starting run threads in backend
+2025-11-08 13:04:06,317 INFO    MainThread:5175 [wandb_run.py:_console_start():2506] atexit reg
+2025-11-08 13:04:06,317 INFO    MainThread:5175 [wandb_run.py:_redirect():2354] redirect: wrap_raw
+2025-11-08 13:04:06,317 INFO    MainThread:5175 [wandb_run.py:_redirect():2423] Wrapping output streams.
+2025-11-08 13:04:06,317 INFO    MainThread:5175 [wandb_run.py:_redirect():2446] Redirects installed.
+2025-11-08 13:04:06,320 INFO    MainThread:5175 [wandb_init.py:init():1073] run started, returning control to user process
+2025-11-08 13:05:27,015 INFO    MainThread:5175 [wandb_run.py:_finish():2272] finishing run chandler-nick-bht-projects/berlin-air-gpr/dtsad16g
+2025-11-08 13:05:27,019 INFO    MainThread:5175 [wandb_run.py:_atexit_cleanup():2471] got exitcode: 0
+2025-11-08 13:05:27,019 INFO    MainThread:5175 [wandb_run.py:_restore():2453] restore
+2025-11-08 13:05:27,019 INFO    MainThread:5175 [wandb_run.py:_restore():2459] restore done
+2025-11-08 13:05:28,083 INFO    MainThread:5175 [wandb_run.py:_footer_sync_info():3835] logging synced files

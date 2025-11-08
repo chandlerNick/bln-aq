@@ -1,0 +1,89 @@
+Training GPR:  23%|████████████████▏                                                     | 1152/5000 [00:18<01:02, 61.21it/s]
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/linecache.py", line 46, in getlines
+    return updatecache(filename, module_globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/tokenize.py", line 398, in open
+    encoding, lines = detect_encoding(buffer.readline)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/tokenize.py", line 367, in detect_encoding
+    first = read_or_stop()
+            ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/tokenize.py", line 325, in read_or_stop
+    return readline()
+           ^^^^^^^^^^
+KeyboardInterrupt
+
+Original exception was:
+Traceback (most recent call last):
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 89, in <module>
+    main()
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py", line 74, in main
+    model, likelihood = train_model(
+                        ^^^^^^^^^^^^
+  File "/storage/bln-aq/analysis-modeling/wandb-experiments/train.py", line 40, in train_model
+    loss = -mll(output, yb)
+            ^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/mlls/variational_elbo.py", line 77, in forward
+    return super().forward(variational_dist_f, target, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/mlls/_approximate_mll.py", line 58, in forward
+    log_likelihood = self._log_likelihood_term(approximate_dist_f, target, **kwargs).div(num_batch)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/mlls/variational_elbo.py", line 61, in _log_likelihood_term
+    return self.likelihood.expected_log_prob(target, variational_dist_f, **kwargs).sum(-1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/likelihoods/gaussian_likelihood.py", line 63, in expected_log_prob
+    mean, variance = input.mean, input.variance
+                                 ^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/distributions/multivariate_normal.py", line 366, in variance
+    diag = self.lazy_covariance_matrix.diagonal(dim1=-1, dim2=-2)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/_linear_operator.py", line 1419, in diagonal
+    return self._diagonal()
+           ^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 30, in _diagonal
+    return sum(linear_op._diagonal().contiguous() for linear_op in self.linear_ops)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 30, in <genexpr>
+    return sum(linear_op._diagonal().contiguous() for linear_op in self.linear_ops)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 30, in _diagonal
+    return sum(linear_op._diagonal().contiguous() for linear_op in self.linear_ops)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/linear_operator/operators/sum_linear_operator.py", line 30, in <genexpr>
+    return sum(linear_op._diagonal().contiguous() for linear_op in self.linear_ops)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/utils/memoize.py", line 59, in g
+    return _add_to_cache(self, cache_name, method(self, *args, **kwargs), *args, kwargs_pkl=kwargs_pkl)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/lazy/lazy_evaluated_kernel_tensor.py", line 25, in wrapped
+    output = method(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/lazy/lazy_evaluated_kernel_tensor.py", line 118, in _diagonal
+    res = super(Kernel, self.kernel).__call__(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 622, in forward
+    next_term = kern(x1, x2, diag=diag, **params)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/kernel.py", line 526, in __call__
+    res = super(Kernel, self).__call__(x1_, x2_, diag=True, last_dim_is_batch=last_dim_is_batch, **params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/module.py", line 82, in __call__
+    outputs = self.forward(*inputs, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/scale_kernel.py", line 109, in forward
+    orig_output = self.base_kernel.forward(x1, x2, diag=diag, last_dim_is_batch=last_dim_is_batch, **params)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/bln-aq/.venv/lib/python3.11/site-packages/gpytorch/kernels/periodic_kernel.py", line 133, in forward
+KeyboardInterrupt
