@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sds011-aggregate
+spec:
+  backoffLimit: 0              # Do NOT retry on failure
+  ttlSecondsAfterFinished: 300 # Delete the pod 5 minutes after completion
+  template:
+    spec:
+      restartPolicy: Never     # Pod will not restart if it fails
+      containers:
+        - name: sds011-aggregate
+          image: chandlernick/aggregate-sds011:latest
+          imagePullPolicy: Always
+          env:
+            - name: RAW_DIR
+              value: "/data/raw"
+            - name: OUTPUT_DIR
+              value: "/data/parquet"
+            # Optional filters:
+            # - name: SENSOR_IDS
+            #   value: "828,1376,1412"
+            # - name: DATE_RANGE
+            #   value: "2024-01-01,2024-01-31"
+            # - name: COLUMNS
+            #   value: "timestamp,lat,lon,P2"
+          volumeMounts:
+            - name: aq-data
+              mountPath: /data/raw
+              subPath: raw   # only the "raw" folder in the PVC is mounted here
+            - name: aq-data
+              mountPath: /data/parquet
+              subPath: parquet  # only the "parquet" folder in the PVC is mounted here
+          resources:
+            requests:
+              cpu: "4"
+              memory: "4Gi"
+            limits:
+              cpu: "8"
+              memory: "16Gi"
+      volumes:
+        - name: aq-data
+          persistentVolumeClaim:
+            claimName: aq-data
