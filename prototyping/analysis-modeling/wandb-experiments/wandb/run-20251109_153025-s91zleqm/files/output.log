@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/glowing-sweep-121_final.pt
+Final RMSE: 6.062, R²: -0.134

@@ -1,0 +1,27 @@
+2025-11-09 08:03:22,838 INFO    MainThread:23010 [wandb_setup.py:_flush():81] Current SDK version is 0.22.3
+2025-11-09 08:03:22,838 INFO    MainThread:23010 [wandb_setup.py:_flush():81] Configure stats pid to 23010
+2025-11-09 08:03:22,838 INFO    MainThread:23010 [wandb_setup.py:_flush():81] Loading settings from /root/.config/wandb/settings
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_setup.py:_flush():81] Loading settings from /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/settings
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_init.py:setup_run_log_directory():706] Logging user logs to /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/run-20251109_080322-7qazoska/logs/debug.log
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_init.py:setup_run_log_directory():707] Logging internal logs to /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/run-20251109_080322-7qazoska/logs/debug-internal.log
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_init.py:init():833] calling init triggers
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_init.py:init():838] wandb.init called with sweep_config: {'batch_size': 256, 'grid_size': 16, 'inducing_strategy': 'kmeans', 'iterations': 200, 'kernel_combine': 'product', 'learn_inducing': True, 'learning_rate': 0.0019844052821092763, 'log_interval': 50, 'matern_nu': 2.5, 'patience': 25, 'period_length': 28.132273684350007, 'spatial_kernel': 'Matern', 'temporal_kernel': 'RBF'}
+config: {'data_path': '../../data/2024-citsci-pollutants-hourly.parquet', 'lookback_days': 28, 'temp_horizon_hours': 1, 'spatial_test_frac': 0.2, 'learning_rate': '1e-3', 'iterations': 5000, 'patience': 50, 'grid_size': 25, 'log_interval': 25, '_wandb': {}}
+2025-11-09 08:03:22,839 INFO    MainThread:23010 [wandb_init.py:init():881] starting backend
+2025-11-09 08:03:23,208 INFO    MainThread:23010 [wandb_init.py:init():884] sending inform_init request
+2025-11-09 08:03:23,215 INFO    MainThread:23010 [wandb_init.py:init():892] backend started and connected
+2025-11-09 08:03:23,215 INFO    MainThread:23010 [wandb_run.py:_config_callback():1390] config_cb None None {'batch_size': 256, 'grid_size': 16, 'inducing_strategy': 'kmeans', 'iterations': 200, 'kernel_combine': 'product', 'learn_inducing': True, 'learning_rate': 0.0019844052821092763, 'log_interval': 50, 'matern_nu': 2.5, 'patience': 25, 'period_length': 28.132273684350007, 'spatial_kernel': 'Matern', 'temporal_kernel': 'RBF'}
+2025-11-09 08:03:23,216 INFO    MainThread:23010 [wandb_init.py:init():962] updated telemetry
+2025-11-09 08:03:23,269 INFO    MainThread:23010 [wandb_init.py:init():986] communicating run to backend with 90.0 second timeout
+2025-11-09 08:03:23,674 INFO    MainThread:23010 [wandb_init.py:init():1033] starting run threads in backend
+2025-11-09 08:03:25,519 INFO    MainThread:23010 [wandb_run.py:_console_start():2506] atexit reg
+2025-11-09 08:03:25,519 INFO    MainThread:23010 [wandb_run.py:_redirect():2354] redirect: wrap_raw
+2025-11-09 08:03:25,519 INFO    MainThread:23010 [wandb_run.py:_redirect():2423] Wrapping output streams.
+2025-11-09 08:03:25,520 INFO    MainThread:23010 [wandb_run.py:_redirect():2446] Redirects installed.
+2025-11-09 08:03:25,525 INFO    MainThread:23010 [wandb_init.py:init():1073] run started, returning control to user process
+2025-11-09 08:22:56,330 INFO    MainThread:23010 [wandb_run.py:_finish():2272] finishing run chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/7qazoska
+2025-11-09 08:22:56,354 INFO    MainThread:23010 [wandb_run.py:_atexit_cleanup():2471] got exitcode: 0
+2025-11-09 08:22:56,354 INFO    MainThread:23010 [wandb_run.py:_restore():2453] restore
+2025-11-09 08:22:56,355 INFO    MainThread:23010 [wandb_run.py:_restore():2459] restore done
+2025-11-09 08:22:57,303 INFO    MainThread:23010 [wandb_run.py:_footer_sync_info():3835] logging synced files

@@ -1,0 +1,12 @@
+{"time":"2025-11-08T23:41:36.073125194Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-08T23:41:36.368780441Z","level":"INFO","msg":"stream: created new stream","id":"muspx4v1"}
+{"time":"2025-11-08T23:41:36.368861103Z","level":"INFO","msg":"handler: started","stream_id":"muspx4v1"}
+{"time":"2025-11-08T23:41:36.369621396Z","level":"INFO","msg":"stream: started","id":"muspx4v1"}
+{"time":"2025-11-08T23:41:36.369640673Z","level":"INFO","msg":"writer: started","stream_id":"muspx4v1"}
+{"time":"2025-11-08T23:41:36.369667724Z","level":"INFO","msg":"sender: started","stream_id":"muspx4v1"}
+{"time":"2025-11-09T00:00:50.354616879Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T00:00:50.577837784Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T00:00:50.580192793Z","level":"INFO","msg":"stream: closing","id":"muspx4v1"}
+{"time":"2025-11-09T00:00:50.58020691Z","level":"INFO","msg":"handler: closed","stream_id":"muspx4v1"}
+{"time":"2025-11-09T00:00:50.580257465Z","level":"INFO","msg":"sender: closed","stream_id":"muspx4v1"}
+{"time":"2025-11-09T00:00:50.580267253Z","level":"INFO","msg":"stream: closed","id":"muspx4v1"}

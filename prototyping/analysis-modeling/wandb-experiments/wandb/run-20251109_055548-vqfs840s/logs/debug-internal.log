@@ -1,0 +1,12 @@
+{"time":"2025-11-09T05:55:48.315041286Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-09T05:55:48.622044845Z","level":"INFO","msg":"stream: created new stream","id":"vqfs840s"}
+{"time":"2025-11-09T05:55:48.622182605Z","level":"INFO","msg":"handler: started","stream_id":"vqfs840s"}
+{"time":"2025-11-09T05:55:48.62278484Z","level":"INFO","msg":"stream: started","id":"vqfs840s"}
+{"time":"2025-11-09T05:55:48.622804648Z","level":"INFO","msg":"writer: started","stream_id":"vqfs840s"}
+{"time":"2025-11-09T05:55:48.622834504Z","level":"INFO","msg":"sender: started","stream_id":"vqfs840s"}
+{"time":"2025-11-09T06:02:39.36522404Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T06:02:39.582053747Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T06:02:39.584746523Z","level":"INFO","msg":"stream: closing","id":"vqfs840s"}
+{"time":"2025-11-09T06:02:39.584764537Z","level":"INFO","msg":"handler: closed","stream_id":"vqfs840s"}
+{"time":"2025-11-09T06:02:39.593338159Z","level":"INFO","msg":"sender: closed","stream_id":"vqfs840s"}
+{"time":"2025-11-09T06:02:39.593363346Z","level":"INFO","msg":"stream: closed","id":"vqfs840s"}

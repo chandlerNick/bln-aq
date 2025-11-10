@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/clear-sweep-149_final.pt
+Final RMSE: 6.039, R²: -0.126

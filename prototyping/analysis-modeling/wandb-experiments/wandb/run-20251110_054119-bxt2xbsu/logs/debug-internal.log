@@ -1,0 +1,12 @@
+{"time":"2025-11-10T05:41:20.200714478Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-10T05:41:20.4877315Z","level":"INFO","msg":"stream: created new stream","id":"bxt2xbsu"}
+{"time":"2025-11-10T05:41:20.487781815Z","level":"INFO","msg":"handler: started","stream_id":"bxt2xbsu"}
+{"time":"2025-11-10T05:41:20.488584107Z","level":"INFO","msg":"stream: started","id":"bxt2xbsu"}
+{"time":"2025-11-10T05:41:20.490758085Z","level":"INFO","msg":"writer: started","stream_id":"bxt2xbsu"}
+{"time":"2025-11-10T05:41:20.49085092Z","level":"INFO","msg":"sender: started","stream_id":"bxt2xbsu"}
+{"time":"2025-11-10T05:48:17.026317618Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-10T05:48:17.246868467Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-10T05:48:17.24923075Z","level":"INFO","msg":"stream: closing","id":"bxt2xbsu"}
+{"time":"2025-11-10T05:48:17.249244346Z","level":"INFO","msg":"handler: closed","stream_id":"bxt2xbsu"}
+{"time":"2025-11-10T05:48:17.261412674Z","level":"INFO","msg":"sender: closed","stream_id":"bxt2xbsu"}
+{"time":"2025-11-10T05:48:17.261423895Z","level":"INFO","msg":"stream: closed","id":"bxt2xbsu"}

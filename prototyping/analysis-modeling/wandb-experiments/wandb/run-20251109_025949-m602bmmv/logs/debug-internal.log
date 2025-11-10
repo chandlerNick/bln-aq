@@ -1,0 +1,13 @@
+{"time":"2025-11-09T02:59:49.389659925Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-09T02:59:49.678410321Z","level":"INFO","msg":"stream: created new stream","id":"m602bmmv"}
+{"time":"2025-11-09T02:59:49.678525258Z","level":"INFO","msg":"handler: started","stream_id":"m602bmmv"}
+{"time":"2025-11-09T02:59:49.679399396Z","level":"INFO","msg":"stream: started","id":"m602bmmv"}
+{"time":"2025-11-09T02:59:49.679421688Z","level":"INFO","msg":"writer: started","stream_id":"m602bmmv"}
+{"time":"2025-11-09T02:59:49.679467935Z","level":"INFO","msg":"sender: started","stream_id":"m602bmmv"}
+{"time":"2025-11-09T02:59:50.22260964Z","level":"ERROR","msg":"file transfer: upload: failed to upload: status: 400 Bad Request: error reading body: stream error: stream ID 1; PROTOCOL_ERROR; received from peer","task":"DefaultUploadTask{FileKind: 1, Path: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb/run-20251109_025949-m602bmmv/files/wandb-metadata.json, Name: wandb-metadata.json, Url: https://storage.googleapis.com/wandb-production.appspot.com/chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/m602bmmv/wandb-metadata.json?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gorilla-files-url-signer-man%40wandb-production.iam.gserviceaccount.com%2F20251109%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251109T025949Z&X-Goog-Expires=86399&X-Goog-Signature=bbb1d7fa9fcee59b9410a76480f0697756772815e4bb1622545ac86b2cd912d7387eaa5e7922fe9a28b94cf9bb644c5a17223d6fa1eb89d7b403898e040a65794e4dab42d5c1b4a57a4c4f754cdd10f04262545b9151ecc2bf9093eab6083385856c4b0394c3d3347e66c55956444c867da316e3370e062415fa82dc2a2802a09835965cb4afadf24bb316dc85fa71237992139ff39dc150356cf5397c3678ce9279803d979bba2a6b03ca4d1a8cc9817149ec45487fb382bb5735b1ad3681ef709a388e94df49d991bafcfbf4a22bfc8186ef79b836b94d29bc8768cffb2d5cd26518e3d03fc8d75b765cdc749aa46e35d3a8ec7a1051af8baeeccd20059ff9&X-Goog-SignedHeaders=host&X-User=chandlernick, Size: 1119}"}
+{"time":"2025-11-09T03:18:08.528627736Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T03:18:08.994957124Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T03:18:08.997857531Z","level":"INFO","msg":"stream: closing","id":"m602bmmv"}
+{"time":"2025-11-09T03:18:08.997879673Z","level":"INFO","msg":"handler: closed","stream_id":"m602bmmv"}
+{"time":"2025-11-09T03:18:08.997943443Z","level":"INFO","msg":"sender: closed","stream_id":"m602bmmv"}
+{"time":"2025-11-09T03:18:08.997955716Z","level":"INFO","msg":"stream: closed","id":"m602bmmv"}

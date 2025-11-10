@@ -1,0 +1,12 @@
+{"time":"2025-11-09T23:33:02.403624826Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-09T23:33:02.713071892Z","level":"INFO","msg":"stream: created new stream","id":"wiyw6est"}
+{"time":"2025-11-09T23:33:02.713141694Z","level":"INFO","msg":"handler: started","stream_id":"wiyw6est"}
+{"time":"2025-11-09T23:33:02.713812137Z","level":"INFO","msg":"stream: started","id":"wiyw6est"}
+{"time":"2025-11-09T23:33:02.713830231Z","level":"INFO","msg":"writer: started","stream_id":"wiyw6est"}
+{"time":"2025-11-09T23:33:02.713854658Z","level":"INFO","msg":"sender: started","stream_id":"wiyw6est"}
+{"time":"2025-11-09T23:53:09.153920607Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T23:53:09.349072691Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T23:53:09.351537938Z","level":"INFO","msg":"stream: closing","id":"wiyw6est"}
+{"time":"2025-11-09T23:53:09.351552165Z","level":"INFO","msg":"handler: closed","stream_id":"wiyw6est"}
+{"time":"2025-11-09T23:53:09.357875194Z","level":"INFO","msg":"sender: closed","stream_id":"wiyw6est"}
+{"time":"2025-11-09T23:53:09.357886786Z","level":"INFO","msg":"stream: closed","id":"wiyw6est"}

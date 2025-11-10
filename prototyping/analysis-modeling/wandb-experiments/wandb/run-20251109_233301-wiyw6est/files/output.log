@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/misty-sweep-161_final.pt
+Final RMSE: 5.726, R²: -0.012
