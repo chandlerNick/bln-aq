@@ -96,9 +96,9 @@ for t_idx in range(start_idx, len(dates) - FORECAST_DAYS + 1):
                     "0.9": high
                 })
 
-
 end_time = time.time()
-print(f"Total sliding-window ARIMA predictions completed in {end_time - start_time:.2f}s")
+elapsed_time = end_time - start_time
+print(f"Total sliding-window ARIMA predictions completed in {elapsed_time:.2f}s")
 
 # ----------------------------
 # Save predictions
@@ -141,7 +141,8 @@ for sensor in df_wide.columns:
 # ----------------------------
 agg_metrics = {
     "ARIMA_R2": r2_score(all_true, all_pred_arima),
-    "ARIMA_RMSE": root_mean_squared_error(all_true, all_pred_arima)
+    "ARIMA_RMSE": root_mean_squared_error(all_true, all_pred_arima),
+    "Elapsed_seconds": elapsed_time
 }
 
 print("Aggregated metrics:", agg_metrics)
@@ -155,7 +156,7 @@ df_metrics_per_sensor.to_csv("/storage/bln-aq/data/metrics_per_sensor.csv")
 print("Saved per-sensor metrics -> /storage/bln-aq/data/metrics_per_sensor.csv")
 
 # ----------------------------
-# Save aggregated metrics
+# Save aggregated metrics (including elapsed time)
 # ----------------------------
 df_agg_metrics = pd.DataFrame([agg_metrics])
 df_agg_metrics.to_csv("/storage/bln-aq/data/metrics_aggregated.csv", index=False)
