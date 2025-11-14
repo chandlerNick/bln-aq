@@ -1,0 +1,31 @@
+# Use official Python image
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        git \
+        && rm -rf /var/lib/apt/lists/*
+
+# Install Python packages directly
+RUN pip install --no-cache-dir \
+        pandas>=2.3.3 \
+        numpy>=1.27.0 \
+        statsmodels>=1.2.0 \
+        scikit-learn>=1.3.0 \
+        plotly>=5.20.0
+
+# Copy your ARIMA sliding script
+COPY baseline.py .
+
+# Entry point
+ENTRYPOINT ["python", "baseline.py"]
+

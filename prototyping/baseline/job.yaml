@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: arima-sliding-job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: arima-sliding
+          image: chandlernick/arima-sliding:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: weatherts-pvc
+              mountPath: /storage/bln-aq
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+      volumes:
+        - name: weatherts-pvc
+          persistentVolumeClaim:
+            claimName: weatherts-pvc
+  backoffLimit: 3
+
