@@ -9,10 +9,10 @@ spec:
       containers:
         - name: arima-sliding
           image: chandlernick/arima-sliding:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           volumeMounts:
             - name: weatherts-pvc
-              mountPath: /storage/bln-aq
+              mountPath: /storage
           env:
             - name: PYTHONUNBUFFERED
               value: "1"
