@@ -26,5 +26,7 @@ dependencies = [
     "pyyaml",
     "chronos-forecasting>=2.0",
     "plotly",
-    "statsmodels"
+    "statsmodels",
+    "scipy",
+    "pygam"
 ]
