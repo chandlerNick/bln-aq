@@ -29,6 +29,9 @@ dependencies = [
     "statsmodels",
     "scipy",
     "pykrige",
+    "geopandas",
+    "contextily",
+    "cartopy"
 ]
 
 [tool.setuptools.packages.find]
