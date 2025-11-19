@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/solar-sweep-111_final.pt
+Final RMSE: 5.715, R²: -0.008

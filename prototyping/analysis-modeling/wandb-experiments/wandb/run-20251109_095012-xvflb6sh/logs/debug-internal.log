@@ -1,0 +1,17 @@
+{"time":"2025-11-09T09:50:12.530587697Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-09T09:50:12.84217898Z","level":"INFO","msg":"stream: created new stream","id":"xvflb6sh"}
+{"time":"2025-11-09T09:50:12.842251015Z","level":"INFO","msg":"handler: started","stream_id":"xvflb6sh"}
+{"time":"2025-11-09T09:50:12.84303871Z","level":"INFO","msg":"stream: started","id":"xvflb6sh"}
+{"time":"2025-11-09T09:50:12.843060672Z","level":"INFO","msg":"writer: started","stream_id":"xvflb6sh"}
+{"time":"2025-11-09T09:50:12.843096419Z","level":"INFO","msg":"sender: started","stream_id":"xvflb6sh"}
+{"time":"2025-11-09T09:54:57.624605788Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/xvflb6sh/file_stream\": dial tcp: lookup api.wandb.ai on 10.96.0.10:53: server misbehaving"}
+{"time":"2025-11-09T09:55:11.998131619Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/xvflb6sh/file_stream\": dial tcp: lookup api.wandb.ai on 10.96.0.10:53: server misbehaving"}
+{"time":"2025-11-09T09:55:28.572813928Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/xvflb6sh/file_stream\": dial tcp: lookup api.wandb.ai on 10.96.0.10:53: server misbehaving"}
+{"time":"2025-11-09T09:55:49.417581098Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/xvflb6sh/file_stream\": dial tcp: lookup api.wandb.ai on 10.96.0.10:53: server misbehaving"}
+{"time":"2025-11-09T09:56:19.525718531Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/chandler-nick-bht-projects/bln-aq-analysis-modeling_wandb-experiments/xvflb6sh/file_stream\": dial tcp: lookup api.wandb.ai on 10.96.0.10:53: server misbehaving"}
+{"time":"2025-11-09T10:06:54.685579606Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T10:06:54.933304709Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T10:06:54.936063059Z","level":"INFO","msg":"stream: closing","id":"xvflb6sh"}
+{"time":"2025-11-09T10:06:54.936078758Z","level":"INFO","msg":"handler: closed","stream_id":"xvflb6sh"}
+{"time":"2025-11-09T10:06:54.952414231Z","level":"INFO","msg":"sender: closed","stream_id":"xvflb6sh"}
+{"time":"2025-11-09T10:06:54.952425483Z","level":"INFO","msg":"stream: closed","id":"xvflb6sh"}

@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/toasty-sweep-147_final.pt
+Final RMSE: 5.674, R²: 0.007

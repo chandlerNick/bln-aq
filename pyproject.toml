@@ -23,5 +23,13 @@ dependencies = [
     "jupyter",
     "tqdm",
     "wandb",
-    "pyyaml"
+    "pyyaml",
+    "chronos-forecasting>=2.0",
+    "plotly",
+    "statsmodels",
+    "scipy",
+    "pykrige"
 ]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/ruby-sweep-103_final.pt
+Final RMSE: 6.063, R²: -0.134

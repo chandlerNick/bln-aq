@@ -1,0 +1,11 @@
+{"time":"2025-11-10T05:58:44.30070664Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-10T05:58:44.595979857Z","level":"INFO","msg":"stream: created new stream","id":"cvn2ack1"}
+{"time":"2025-11-10T05:58:44.596038057Z","level":"INFO","msg":"handler: started","stream_id":"cvn2ack1"}
+{"time":"2025-11-10T05:58:44.596798611Z","level":"INFO","msg":"stream: started","id":"cvn2ack1"}
+{"time":"2025-11-10T05:58:44.59681949Z","level":"INFO","msg":"writer: started","stream_id":"cvn2ack1"}
+{"time":"2025-11-10T05:58:44.596850478Z","level":"INFO","msg":"sender: started","stream_id":"cvn2ack1"}
+{"time":"2025-11-10T05:58:59.127059102Z","level":"INFO","msg":"stream: closing","id":"cvn2ack1"}
+{"time":"2025-11-10T05:58:59.967776382Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-10T05:59:00.244739142Z","level":"INFO","msg":"handler: closed","stream_id":"cvn2ack1"}
+{"time":"2025-11-10T05:59:00.244822079Z","level":"INFO","msg":"sender: closed","stream_id":"cvn2ack1"}
+{"time":"2025-11-10T05:59:00.244834051Z","level":"INFO","msg":"stream: closed","id":"cvn2ack1"}

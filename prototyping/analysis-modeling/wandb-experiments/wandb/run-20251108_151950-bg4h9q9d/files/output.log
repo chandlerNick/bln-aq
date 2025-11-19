@@ -1,0 +1,4 @@
+cuda
+Commencing training...
+Final checkpoint saved to: /storage/bln-aq/analysis-modeling/wandb-experiments/wandb-checkpoint-cache/lemon-sweep-4_final.pt
+Final RMSE: 5.990, R²: -0.107

@@ -1,0 +1,12 @@
+{"time":"2025-11-09T10:23:58.411472591Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-09T10:23:58.715594924Z","level":"INFO","msg":"stream: created new stream","id":"qmpp3b9i"}
+{"time":"2025-11-09T10:23:58.71567229Z","level":"INFO","msg":"handler: started","stream_id":"qmpp3b9i"}
+{"time":"2025-11-09T10:23:58.716324249Z","level":"INFO","msg":"stream: started","id":"qmpp3b9i"}
+{"time":"2025-11-09T10:23:58.716344968Z","level":"INFO","msg":"writer: started","stream_id":"qmpp3b9i"}
+{"time":"2025-11-09T10:23:58.716373803Z","level":"INFO","msg":"sender: started","stream_id":"qmpp3b9i"}
+{"time":"2025-11-09T10:34:08.360104305Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T10:34:08.594651356Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T10:34:08.597233323Z","level":"INFO","msg":"stream: closing","id":"qmpp3b9i"}
+{"time":"2025-11-09T10:34:08.597251237Z","level":"INFO","msg":"handler: closed","stream_id":"qmpp3b9i"}
+{"time":"2025-11-09T10:34:08.609576932Z","level":"INFO","msg":"sender: closed","stream_id":"qmpp3b9i"}
+{"time":"2025-11-09T10:34:08.609592391Z","level":"INFO","msg":"stream: closed","id":"qmpp3b9i"}

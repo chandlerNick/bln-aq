@@ -1,0 +1,12 @@
+{"time":"2025-11-09T02:22:24.814298014Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-09T02:22:25.148838078Z","level":"INFO","msg":"stream: created new stream","id":"eiwkisbc"}
+{"time":"2025-11-09T02:22:25.148909834Z","level":"INFO","msg":"handler: started","stream_id":"eiwkisbc"}
+{"time":"2025-11-09T02:22:25.149582922Z","level":"INFO","msg":"stream: started","id":"eiwkisbc"}
+{"time":"2025-11-09T02:22:25.149580267Z","level":"INFO","msg":"writer: started","stream_id":"eiwkisbc"}
+{"time":"2025-11-09T02:22:25.149629991Z","level":"INFO","msg":"sender: started","stream_id":"eiwkisbc"}
+{"time":"2025-11-09T02:30:14.147056962Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-09T02:30:14.398096704Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-09T02:30:14.400832371Z","level":"INFO","msg":"stream: closing","id":"eiwkisbc"}
+{"time":"2025-11-09T02:30:14.40084747Z","level":"INFO","msg":"handler: closed","stream_id":"eiwkisbc"}
+{"time":"2025-11-09T02:30:14.404015782Z","level":"INFO","msg":"sender: closed","stream_id":"eiwkisbc"}
+{"time":"2025-11-09T02:30:14.404027815Z","level":"INFO","msg":"stream: closed","id":"eiwkisbc"}

@@ -1,0 +1,12 @@
+{"time":"2025-11-08T18:13:22.117672456Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-08T18:13:22.42107165Z","level":"INFO","msg":"stream: created new stream","id":"cmhpt2ph"}
+{"time":"2025-11-08T18:13:22.421170747Z","level":"INFO","msg":"handler: started","stream_id":"cmhpt2ph"}
+{"time":"2025-11-08T18:13:22.422002455Z","level":"INFO","msg":"stream: started","id":"cmhpt2ph"}
+{"time":"2025-11-08T18:13:22.422019457Z","level":"INFO","msg":"writer: started","stream_id":"cmhpt2ph"}
+{"time":"2025-11-08T18:13:22.422050706Z","level":"INFO","msg":"sender: started","stream_id":"cmhpt2ph"}
+{"time":"2025-11-08T18:20:45.879788376Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-08T18:20:46.148879398Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-08T18:20:46.151435226Z","level":"INFO","msg":"stream: closing","id":"cmhpt2ph"}
+{"time":"2025-11-08T18:20:46.151450424Z","level":"INFO","msg":"handler: closed","stream_id":"cmhpt2ph"}
+{"time":"2025-11-08T18:20:46.154380407Z","level":"INFO","msg":"sender: closed","stream_id":"cmhpt2ph"}
+{"time":"2025-11-08T18:20:46.15440293Z","level":"INFO","msg":"stream: closed","id":"cmhpt2ph"}

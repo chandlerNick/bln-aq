@@ -1,0 +1,11 @@
+{"time":"2025-11-10T05:40:59.045129372Z","level":"INFO","msg":"stream: starting","core version":"0.22.3"}
+{"time":"2025-11-10T05:40:59.345159224Z","level":"INFO","msg":"stream: created new stream","id":"plzds7t6"}
+{"time":"2025-11-10T05:40:59.345217434Z","level":"INFO","msg":"handler: started","stream_id":"plzds7t6"}
+{"time":"2025-11-10T05:40:59.345938203Z","level":"INFO","msg":"stream: started","id":"plzds7t6"}
+{"time":"2025-11-10T05:40:59.345938874Z","level":"INFO","msg":"writer: started","stream_id":"plzds7t6"}
+{"time":"2025-11-10T05:40:59.3459739Z","level":"INFO","msg":"sender: started","stream_id":"plzds7t6"}
+{"time":"2025-11-10T05:41:08.274364379Z","level":"INFO","msg":"stream: closing","id":"plzds7t6"}
+{"time":"2025-11-10T05:41:08.956587044Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-10T05:41:09.157426808Z","level":"INFO","msg":"handler: closed","stream_id":"plzds7t6"}
+{"time":"2025-11-10T05:41:09.157516697Z","level":"INFO","msg":"sender: closed","stream_id":"plzds7t6"}
+{"time":"2025-11-10T05:41:09.157529241Z","level":"INFO","msg":"stream: closed","id":"plzds7t6"}

@@ -1,0 +1,128 @@
+_wandb:
+    value:
+        cli_version: 0.22.3
+        e:
+            f1iwxe94s4jabajw0gch54gva8av84j0:
+                args:
+                    - --batch_size=512
+                    - --grid_size=49
+                    - --inducing_strategy=kmeans
+                    - --iterations=200
+                    - --kernel_combine=product
+                    - --learn_inducing=True
+                    - --learning_rate=7.13863799392056e-05
+                    - --log_interval=50
+                    - --matern_nu=2.5
+                    - --patience=50
+                    - --period_length=18.66903252797631
+                    - --spatial_kernel=Matern
+                    - --temporal_kernel=RBF
+                codePath: analysis-modeling/wandb-experiments/run_experiment.py
+                codePathLocal: run_experiment.py
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "12.8"
+                disk:
+                    /:
+                        total: "589553541120"
+                        used: "460206501888"
+                email: njchandler2002@gmail.com
+                executable: /storage/bln-aq/.venv/bin/python
+                git:
+                    commit: 68169003c70ca28d8a125693a01710ca06dd6623
+                    remote: https://github.com/chandlerNick/bln-aq.git
+                gpu: Tesla V100S-PCIE-32GB
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Volta
+                      cudaCores: 5120
+                      memoryTotal: "34359738368"
+                      name: Tesla V100S-PCIE-32GB
+                      uuid: GPU-4d1c2617-649d-40f1-9430-2c9ab3297b79
+                host: weatherts-6c75d475f6-lwbsc
+                memory:
+                    total: "540579323904"
+                os: Linux-6.8.0-86-generic-x86_64-with-glibc2.36
+                program: /storage/bln-aq/analysis-modeling/wandb-experiments/run_experiment.py
+                python: CPython 3.11.9
+                root: /storage/bln-aq/analysis-modeling/wandb-experiments
+                startedAt: "2025-11-09T21:06:08.222369Z"
+                writerId: f1iwxe94s4jabajw0gch54gva8av84j0
+        m:
+            - "1": iteration
+              "6":
+                - 3
+              "7": []
+            - "1": train_loss
+              "5": 1
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": val_rmse
+              "5": 1
+              "6":
+                - 1
+                - 3
+              "7": []
+            - "1": train_rmse
+              "5": 1
+              "6":
+                - 1
+                - 3
+              "7": []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 1
+                - 5
+                - 53
+                - 100
+            "2":
+                - 1
+                - 5
+                - 53
+                - 100
+            "3":
+                - 2
+                - 7
+                - 14
+                - 16
+            "4": 3.11.9
+            "5": 0.22.3
+            "12": 0.22.3
+            "13": linux-x86_64
+batch_size:
+    value: 512
+data_path:
+    value: ../../data/2024-citsci-pollutants-hourly.parquet
+grid_size:
+    value: 49
+inducing_strategy:
+    value: kmeans
+iterations:
+    value: 200
+kernel_combine:
+    value: product
+learn_inducing:
+    value: true
+learning_rate:
+    value: 7.13863799392056e-05
+log_interval:
+    value: 50
+lookback_days:
+    value: 28
+matern_nu:
+    value: 2.5
+patience:
+    value: 50
+period_length:
+    value: 18.66903252797631
+spatial_kernel:
+    value: Matern
+spatial_test_frac:
+    value: 0.2
+temp_horizon_hours:
+    value: 1
+temporal_kernel:
+    value: RBF

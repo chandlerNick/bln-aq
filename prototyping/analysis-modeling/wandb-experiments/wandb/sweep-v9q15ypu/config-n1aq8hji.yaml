@@ -1,0 +1,28 @@
+wandb_version: 1
+
+batch_size:
+  value: 256
+grid_size:
+  value: 36
+inducing_strategy:
+  value: grid
+iterations:
+  value: 200
+kernel_combine:
+  value: product
+learn_inducing:
+  value: true
+learning_rate:
+  value: 1.3845011072260712e-05
+log_interval:
+  value: 50
+matern_nu:
+  value: 0.5
+patience:
+  value: 50
+period_length:
+  value: 21.00638205382509
+spatial_kernel:
+  value: Matern
+temporal_kernel:
+  value: Periodic
