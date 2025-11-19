@@ -1,35 +1,40 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[1]:
 import pandas as pd
 import pyarrow.dataset as ds
 from pathlib import Path
 from chronos import Chronos2Pipeline
 import numpy as np
-
-# ----------------------------
-# Paths
-# ----------------------------
-import os
-from pathlib import Path
-
-parquet_dir = Path(os.environ.get("PARQUET_DIR", "/data/parquet"))
-output_dir = parquet_dir
-output_dir.mkdir(exist_ok=True, parents=True)
-output_file = output_dir / "predicted_data.parquet"
+from pykrige.ok import OrdinaryKriging
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import cartopy.crs as ccrs
+import geopandas as gpd
 
 # ----------------------------
 # Load dataset
 # ----------------------------
+parquet_dir = Path("tester.parquet")
 dataset = ds.dataset(parquet_dir, format="parquet")
 df = dataset.to_table().to_pandas()
 
+BBOX = {
+    "lat_min": 52.3383,
+    "lat_max": 52.6755,
+    "lon_min": 13.0884,
+    "lon_max": 13.7612,
+}
+
+
+# In[2]:
 # ----------------------------
 # Preprocess and aggregate
 # ----------------------------
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['date'] = df['timestamp'].dt.floor('D')
-df['P2'] = pd.to_numeric(df['P2'], errors='coerce')
+df['P2'] = pd.to_numeric(df['P2'], errors='coerce')  # coerce invalid parsing
 
 daily_avg = (
     df.groupby(['lat', 'lon', 'date', 'sensor_id'], as_index=False)['P2']
@@ -42,20 +47,26 @@ daily_avg['item_id'] = daily_avg['sensor_id']
 location_dict = daily_avg.groupby('item_id')[['lat','lon']].first().apply(tuple, axis=1).to_dict()
 daily_df = daily_avg[['date', 'item_id', 'target']].rename(columns={'date':'timestamp'})
 
+
+# In[3]:
 # ----------------------------
 # Chronos preparation
 # ----------------------------
 FORECAST_DAYS = 3
-QUANTILES = [0.1, 0.9]
+QUANTILES = [0.1, 0.5, 0.9]
 
+# Pivot to wide format for filtering
 df_wide = daily_df.pivot(index="timestamp", columns="item_id", values="target").asfreq("D")
 valid_sensors = df_wide.notna().sum()[lambda x: x >= 10].index
 df_wide = df_wide[valid_sensors]
 
+# Convert back to long format
 train_long = df_wide.reset_index().melt(id_vars="timestamp", var_name="item_id", value_name="target")
 
+# Load Chronos model
 pipeline = Chronos2Pipeline.from_pretrained("amazon/chronos-2", device_map="cuda")
 
+# Predict
 pred_df = pipeline.predict_df(
     train_long,
     prediction_length=FORECAST_DAYS,
@@ -65,15 +76,17 @@ pred_df = pipeline.predict_df(
     target="target"
 )
 
+
+# In[4]:
 # ----------------------------
-# Prepare for saving
+# Prepare for Kriging
 # ----------------------------
 pred_df[['lat', 'lon']] = pred_df['item_id'].map(lambda x: location_dict.get(x, (None, None))).apply(pd.Series)
 pred_df = pred_df.dropna(subset=['lat','lon'])
 pred_df = pred_df.rename(columns={"predictions": "value"})
 pred_df["is_sensor"] = True
 
-data = pred_df.drop(columns=['target_name']).copy()
+data = pred_df.drop(columns=['target_name', '0.5']).copy()
 
 # Filter unrealistic predictions
 latest_ts = data['timestamp'].max()
@@ -84,11 +97,41 @@ data = data[data['timestamp'] == latest_ts]
 upper_cutoff = data['value'].quantile(0.98)
 data = data[data['value'] <= upper_cutoff]
 
+# Winsorize remaining values
 lower_val, upper_val = np.percentile(data['value'], [1, 99])
 data['value'] = data['value'].clip(lower=lower_val, upper=upper_val)
 
+
+# In[5]:
 # ----------------------------
-# Save final DataFrame
+# Kriging & Plotting
 # ----------------------------
-data.to_parquet(output_file, index=False)
-print(f"Saved cleaned prediction data to {output_file}")
+lon, lat, z = data["lon"].astype(float).values, data["lat"].astype(float).values, data["value"].astype(float).values
+
+buffer = 0.01
+lon_grid = np.linspace(BBOX['lon_min'] - buffer, BBOX['lon_max'] + buffer, 200)
+lat_grid = np.linspace(BBOX['lat_min'] - buffer, BBOX['lat_max'] + buffer, 200)
+Lon, Lat = np.meshgrid(lon_grid, lat_grid)
+
+OK = OrdinaryKriging(lon, lat, z, variogram_model='hole-effect', verbose=False, enable_plotting=False)
+Z_kriged, ss = OK.execute('grid', lon_grid, lat_grid)
+
+# Load Berlin Bezirke GeoJSON
+bezirke = gpd.read_file("bez.geojson").to_crs(epsg=4326)
+
+# Plot
+fig, ax = plt.subplots(figsize=(10, 10), subplot_kw={'projection': ccrs.PlateCarree()})
+im = ax.pcolormesh(Lon, Lat, Z_kriged, shading='auto', cmap='viridis', alpha=0.7, transform=ccrs.PlateCarree())
+ax.scatter(lon, lat, c=z, edgecolor='black', s=40, transform=ccrs.PlateCarree(), cmap='viridis')
+
+for geom in bezirke.geometry:
+    ax.add_geometries([geom], crs=ccrs.PlateCarree(), facecolor='none', edgecolor='black', linewidth=1)
+
+sm = mpl.cm.ScalarMappable(cmap='viridis', norm=mpl.colors.Normalize(vmin=z.min(), vmax=z.max()))
+sm.set_array([])
+cbar = plt.colorbar(sm, ax=ax, fraction=0.035, pad=0.04)
+cbar.set_label("PM2.5")
+
+ax.set_title("Kriging Heatmap with Berlin Bezirke Overlay")
+plt.savefig("fig.pdf")
+print(Z_kriged.shape)
