@@ -33,4 +33,4 @@ spec:
           persistentVolumeClaim:
             claimName: aq-data
       nodeSelector:
-        nvidia.com/gpu.family: pascal  # P100 belongs to Pascal family
+        nvidia.com/gpu.family: volta  # V100 is Volta
