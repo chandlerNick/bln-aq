@@ -28,7 +28,7 @@ dependencies = [
     "plotly",
     "statsmodels",
     "scipy",
-    "pykrige"
+    "pykrige",
 ]
 
 [tool.setuptools.packages.find]

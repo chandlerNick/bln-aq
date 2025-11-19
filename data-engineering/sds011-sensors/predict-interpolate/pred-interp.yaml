@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sds011-predict
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: sds011-predict
+          image: chandlernick/chronos-krige:latest  # GPU-ready Python + Chronos image
+          imagePullPolicy: Always
+          command: ["python", "/app/predict.py"]
+          env:
+            - name: PARQUET_DIR
+              value: "/data/parquet"
+          volumeMounts:
+            - name: aq-data
+              mountPath: /data/parquet
+              subPath: parquet
+          resources:
+            limits:
+              nvidia.com/gpu: 1     # request 1 GPU
+              cpu: "4"
+              memory: "16Gi"
+            requests:
+              cpu: "2"
+              memory: "8Gi"
+      volumes:
+        - name: aq-data
+          persistentVolumeClaim:
+            claimName: aq-data
+      nodeSelector:
+        nvidia.com/gpu.family: pascal  # P100 belongs to Pascal family

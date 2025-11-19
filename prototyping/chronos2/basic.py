@@ -102,14 +102,6 @@ df.to_parquet("/storage/bln-aq/data/2024-citsci-pm2.5-daily.parquet")
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
-# ----------------------------
-# Load Chronos2 model
-# ----------------------------
-pipeline = Chronos2Pipeline.from_pretrained("amazon/chronos-2", device_map="cuda")
-
-print("model loaded")
-
-
 # Generate predictions each step in a sliding window 
 
 # ----------------------------
