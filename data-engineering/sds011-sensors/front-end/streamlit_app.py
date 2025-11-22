@@ -2,87 +2,110 @@ import streamlit as st
 from pathlib import Path
 import pandas as pd
 import numpy as np
-import geopandas as gpd
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import cartopy.crs as ccrs
+import pydeck as pdk
+import os
 
 # ----------------------------
 # Paths
 # ----------------------------
-DATA_DIR = Path("/data/parquet")   # mounted PV
-GEO_FILE = Path("/app/bezirke.geojson")  # baked into container
-
-# REMOVE BEFORE FLIGHT
-DATA_DIR = Path("../tester-data")
-GEO_FILE = Path("./bezirke.geojson")
-
-# Load bezirke polygons once
-bezirke = gpd.read_file(GEO_FILE).to_crs(epsg=4326)
+DATA_DIR = Path(os.environ.get("PARQUET_DIR", "/data/parquet"))
+DATA_DIR = Path("../tester-data")  # adjust for production
 
 # ----------------------------
 # Streamlit UI
 # ----------------------------
 st.set_page_config(page_title="Berlin PM2.5 Forecast", layout="wide")
-st.title("Berlin PM2.5 Forecast (Kriged)")
+st.title("Berlin PM2.5 Kriging Forecast (Interactive)")
 
-# Dynamically list available dates
-dates = sorted([f.stem.replace("predicted_data_", "") for f in DATA_DIR.glob("predicted_data_*.parquet")])
+# List forecast dates
+dates = sorted([f.stem.replace("predicted_plus_kriged_", "") for f in DATA_DIR.glob("predicted_plus_kriged_*.parquet")])
 if not dates:
-    st.error("No forecast data found in /data/parquet!")
+    st.error(f"No forecast data found in {DATA_DIR}!")
     st.stop()
 
 selected_date = st.selectbox("Select forecast date", dates)
 
 # ----------------------------
-# Load data for selected date
+# Load forecast data
 # ----------------------------
-pred_file = DATA_DIR / f"predicted_data_{selected_date}.parquet"
-grid_file = DATA_DIR / f"Z_kriged_{selected_date}.npy"
+pred_file = DATA_DIR / f"predicted_plus_kriged_{selected_date}.parquet"
+if not pred_file.exists():
+    st.error(f"Forecast file missing for {selected_date}")
+    st.stop()
 
 data = pd.read_parquet(pred_file)
-Z_kriged = np.load(grid_file)
-
-# Sensor coordinates and values
-lon = data["lon"].astype(float).values
-lat = data["lat"].astype(float).values
-values = data["value"].astype(float).values
 
 # ----------------------------
-# Prepare grid
+# Prepare pydeck layers
 # ----------------------------
-# Assuming fixed BBOX and grid shape
-BBOX = {
-    "lat_min": 52.3383,
-    "lat_max": 52.6755,
-    "lon_min": 13.0884,
-    "lon_max": 13.7612,
-}
-buffer = 0.01
-ny, nx = Z_kriged.shape
-lon_grid = np.linspace(BBOX['lon_min'] - buffer, BBOX['lon_max'] + buffer, nx)
-lat_grid = np.linspace(BBOX['lat_min'] - buffer, BBOX['lat_max'] + buffer, ny)
-Lon, Lat = np.meshgrid(lon_grid, lat_grid)
+
+# Sensor points
+sensor_df = data[data['is_sensor']]
+kriged_df = data[~data['is_sensor']]
+
+# Function to normalize values to 0-255 for color mapping
+def normalize_color(vals, cmap_min=None, cmap_max=None):
+    if cmap_min is None: cmap_min = np.nanmin(vals)
+    if cmap_max is None: cmap_max = np.nanmax(vals)
+    norm = ((vals - cmap_min) / (cmap_max - cmap_min) * 255).astype(int)
+    return norm
+
+# Compute color values (R,G,B)
+cmap_min, cmap_max = data['value'].min(), data['value'].max()
+kriged_colors = np.stack([normalize_color(kriged_df['value'], cmap_min, cmap_max),
+                          np.zeros(len(kriged_df)),
+                          255 - normalize_color(kriged_df['value'], cmap_min, cmap_max)], axis=1)
+
+sensor_colors = np.stack([np.zeros(len(sensor_df)), 
+                          255 - normalize_color(sensor_df['value'], cmap_min, cmap_max), 
+                          normalize_color(sensor_df['value'], cmap_min, cmap_max)], axis=1)
+
+# Pydeck layers
+layers = [
+    pdk.Layer(
+        "ScatterplotLayer",
+        data=kriged_df,
+        get_position='[lon, lat]',
+        get_fill_color=kriged_colors.tolist(),
+        get_radius=50,
+        pickable=True,
+        auto_highlight=True,
+        radius_min_pixels=2,
+        radius_max_pixels=10,
+        tooltip=True
+    ),
+    pdk.Layer(
+        "ScatterplotLayer",
+        data=sensor_df,
+        get_position='[lon, lat]',
+        get_fill_color=sensor_colors.tolist(),
+        get_radius=100,
+        pickable=True,
+        auto_highlight=True,
+        radius_min_pixels=5,
+        radius_max_pixels=12,
+        tooltip=True
+    )
+]
 
 # ----------------------------
-# Plotting
+# Pydeck Map
 # ----------------------------
-fig, ax = plt.subplots(figsize=(10, 10), subplot_kw={'projection': ccrs.PlateCarree()})
-im = ax.pcolormesh(Lon, Lat, Z_kriged, shading='auto', cmap='viridis', alpha=0.7, transform=ccrs.PlateCarree())
-ax.scatter(lon, lat, c=values, edgecolor='black', s=40, transform=ccrs.PlateCarree(), cmap='viridis')
+view_state = pdk.ViewState(
+    longitude=13.405,
+    latitude=52.52,
+    zoom=11,
+    pitch=0
+)
 
-for geom in bezirke.geometry:
-    ax.add_geometries([geom], crs=ccrs.PlateCarree(), facecolor='none', edgecolor='black', linewidth=1)
+r = pdk.Deck(
+    layers=layers,
+    initial_view_state=view_state,
+    tooltip={
+        "html": "<b>Value:</b> {value} µg/m³<br><b>0.1:</b> {0.1} µg/m³<br><b>0.9:</b> {0.9} µg/m³",
+        "style": {"color": "white"}
+    },
+    map_style='light'
+)
 
-# Colorbar (auto-scaled)
-vmin, vmax = np.nanmin(Z_kriged), np.nanmax(Z_kriged)
-sm = mpl.cm.ScalarMappable(cmap='viridis', norm=mpl.colors.Normalize(vmin=vmin, vmax=vmax))
-sm.set_array([])
-cbar = plt.colorbar(sm, ax=ax, fraction=0.035, pad=0.04)
-cbar.set_label("PM2.5 (µg/m³)")
-
-ax.set_xlabel("Longitude")
-ax.set_ylabel("Latitude")
-ax.set_title(f"PM2.5 Kriging Heatmap - {selected_date}")
-
-st.pyplot(fig)
+st.pydeck_chart(r)
