@@ -31,7 +31,8 @@ dependencies = [
     "pykrige",
     "geopandas",
     "contextily",
-    "cartopy"
+    "cartopy",
+    "streamlit"
 ]
 
 [tool.setuptools.packages.find]

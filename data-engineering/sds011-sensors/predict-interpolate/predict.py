@@ -6,27 +6,37 @@ import pyarrow.dataset as ds
 from pathlib import Path
 from chronos import Chronos2Pipeline
 import numpy as np
+from pykrige.ok import OrdinaryKriging
+import os
+
 
 # ----------------------------
 # Paths
 # ----------------------------
-import os
-from pathlib import Path
+
+BBOX = {
+    "lat_min": 52.3383,
+    "lat_max": 52.6755,
+    "lon_min": 13.0884,
+    "lon_max": 13.7612,
+}
 
 parquet_dir = Path(os.environ.get("PARQUET_DIR", "/data/parquet"))
 output_dir = parquet_dir
 output_dir.mkdir(exist_ok=True, parents=True)
-output_file = output_dir / "predicted_data.parquet"
+
 
 # ----------------------------
 # Load dataset
 # ----------------------------
-dataset = ds.dataset(parquet_dir, format="parquet")
+dataset = ds.dataset(parquet_dir / "sds011.parquet", format="parquet")
 df = dataset.to_table().to_pandas()
 
 # ----------------------------
 # Preprocess and aggregate
 # ----------------------------
+
+print(df.head(5), df.columns)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 df['date'] = df['timestamp'].dt.floor('D')
 df['P2'] = pd.to_numeric(df['P2'], errors='coerce')
@@ -90,5 +100,29 @@ data['value'] = data['value'].clip(lower=lower_val, upper=upper_val)
 # ----------------------------
 # Save final DataFrame
 # ----------------------------
+save_date = latest_ts.date()
+output_file = output_dir / f"predicted_data_{save_date}.parquet"
 data.to_parquet(output_file, index=False)
 print(f"Saved cleaned prediction data to {output_file}")
+
+
+### KRIGING
+
+# ----------------------------
+# Kriging setup
+# ----------------------------
+lon, lat, z = data["lon"].astype(float).values, data["lat"].astype(float).values, data["value"].astype(float).values
+
+buffer = 0.01
+lon_grid = np.linspace(BBOX['lon_min'] - buffer, BBOX['lon_max'] + buffer, 200)
+lat_grid = np.linspace(BBOX['lat_min'] - buffer, BBOX['lat_max'] + buffer, 200)
+Lon, Lat = np.meshgrid(lon_grid, lat_grid)
+
+OK = OrdinaryKriging(lon, lat, z, variogram_model='hole-effect', verbose=False, enable_plotting=False)
+Z_kriged, ss = OK.execute('grid', lon_grid, lat_grid)
+
+Z_kriged = Z_kriged.filled(np.nan)
+ss = ss.filled(np.nan)
+
+np.save(parquet_dir / f"Z_kriged_{save_date}.npy", Z_kriged)
+np.save(parquet_dir / f"kriging_variance_{save_date}.npy", ss)

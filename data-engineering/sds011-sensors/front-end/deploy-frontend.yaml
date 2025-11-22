@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pm25-streamlit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pm25
+  template:
+    metadata:
+      labels:
+        app: pm25
+    spec:
+      containers:
+      - name: streamlit
+        image: chandlernick/pm25-fe:latest
+        ports:
+        - containerPort: 8501
+        volumeMounts:
+        - mountPath: /data/parquet
+          name: pm25-data
+      volumes:
+      - name: pm25-data
+        persistentVolumeClaim:
+          claimName: aq-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pm25-streamlit-service
+spec:
+  type: ClusterIP
+  selector:
+    app: pm25-streamlit
+  ports:
+    - name: ui
+      protocol: TCP
+      port: 80         # exposed internally in the cluster
+      targetPort: 8501 # Streamlit container port
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pm25-streamlit-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "pm25.project.ris.bht-berlin.de"  # replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pm25-streamlit-service
+                port:
+                  name: ui
