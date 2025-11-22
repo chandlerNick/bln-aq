@@ -4,12 +4,16 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 import os
+import matplotlib.cm as cm
+import matplotlib.colors as mcolors
+import matplotlib.pyplot as plt
+import io
 
 # ----------------------------
 # Paths
 # ----------------------------
 DATA_DIR = Path(os.environ.get("PARQUET_DIR", "/data/parquet"))
-DATA_DIR = Path("../tester-data")  # adjust for production
+#DATA_DIR = Path("../tester-data")  # adjust for production
 
 # ----------------------------
 # Streamlit UI
@@ -38,35 +42,37 @@ data = pd.read_parquet(pred_file)
 # ----------------------------
 # Prepare pydeck layers
 # ----------------------------
-
-# Sensor points
 sensor_df = data[data['is_sensor']]
 kriged_df = data[~data['is_sensor']]
 
-# Function to normalize values to 0-255 for color mapping
-def normalize_color(vals, cmap_min=None, cmap_max=None):
-    if cmap_min is None: cmap_min = np.nanmin(vals)
-    if cmap_max is None: cmap_max = np.nanmax(vals)
-    norm = ((vals - cmap_min) / (cmap_max - cmap_min) * 255).astype(int)
-    return norm
 
-# Compute color values (R,G,B)
-cmap_min, cmap_max = data['value'].min(), data['value'].max()
-kriged_colors = np.stack([normalize_color(kriged_df['value'], cmap_min, cmap_max),
-                          np.zeros(len(kriged_df)),
-                          255 - normalize_color(kriged_df['value'], cmap_min, cmap_max)], axis=1)
+# ----------------------------
+# Color mapping using viridis
+# ----------------------------
+cmap = plt.colormaps["viridis"]
+norm = mcolors.Normalize(vmin=data['value'].min(), vmax=data['value'].max())
 
-sensor_colors = np.stack([np.zeros(len(sensor_df)), 
-                          255 - normalize_color(sensor_df['value'], cmap_min, cmap_max), 
-                          normalize_color(sensor_df['value'], cmap_min, cmap_max)], axis=1)
+kriged_colors = (cmap(norm(kriged_df['value'].values))[:, :3] * 255).astype(int)
+sensor_colors = (cmap(norm(sensor_df['value'].values))[:, :3] * 255).astype(int)
 
+
+# Add a column with color to each DataFrame
+kriged_df = kriged_df.copy()
+kriged_df["color"] = kriged_colors.tolist()
+
+sensor_df = sensor_df.copy()
+sensor_df["color"] = sensor_colors.tolist()
+
+
+# ----------------------------
 # Pydeck layers
+# ----------------------------
 layers = [
     pdk.Layer(
         "ScatterplotLayer",
         data=kriged_df,
         get_position='[lon, lat]',
-        get_fill_color=kriged_colors.tolist(),
+        get_fill_color='color',
         get_radius=50,
         pickable=True,
         auto_highlight=True,
@@ -78,7 +84,7 @@ layers = [
         "ScatterplotLayer",
         data=sensor_df,
         get_position='[lon, lat]',
-        get_fill_color=sensor_colors.tolist(),
+        get_fill_color='color',
         get_radius=100,
         pickable=True,
         auto_highlight=True,
@@ -89,7 +95,7 @@ layers = [
 ]
 
 # ----------------------------
-# Pydeck Map
+# Pydeck map
 # ----------------------------
 view_state = pdk.ViewState(
     longitude=13.405,
@@ -109,3 +115,17 @@ r = pdk.Deck(
 )
 
 st.pydeck_chart(r)
+
+# ----------------------------
+# Add color legend
+# ----------------------------
+fig, ax = plt.subplots(figsize=(6, 1))
+fig.subplots_adjust(bottom=0.5)
+cbar = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap),
+                    cax=ax, orientation='horizontal')
+cbar.set_label("PM2.5 [µg/m³]")
+
+buf = io.BytesIO()
+fig.savefig(buf, format="png", bbox_inches='tight')
+buf.seek(0)
+st.image(buf)
