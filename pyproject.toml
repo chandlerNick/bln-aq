@@ -28,7 +28,11 @@ dependencies = [
     "plotly",
     "statsmodels",
     "scipy",
-    "pykrige"
+    "pykrige",
+    "geopandas",
+    "contextily",
+    "cartopy",
+    "streamlit"
 ]
 
 [tool.setuptools.packages.find]

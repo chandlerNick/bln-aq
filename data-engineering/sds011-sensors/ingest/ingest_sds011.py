@@ -64,7 +64,7 @@ def fetch_for_date(target_date: datetime):
 
 
 def main():
-    target_date = datetime.now(timezone.utc) - timedelta(days=2)
+    target_date = datetime.now(timezone.utc) - timedelta(days=1)
     fetch_for_date(target_date)
 
 

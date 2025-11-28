@@ -7,6 +7,7 @@ spec:
   containers:
     - name: sds011-ingest
       image: chandlernick/sds011-ingest:latest
+      imagePullPolicy: Always
       command:
         - /bin/sh
         - -c

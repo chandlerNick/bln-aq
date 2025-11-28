@@ -1,0 +1,85 @@
+# ==============================================================
+# Deployment
+# ==============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pm25-streamlit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pm25-streamlit
+  template:
+    metadata:
+      labels:
+        app: pm25-streamlit
+    spec:
+      containers:
+        - name: streamlit
+          image: chandlernick/pm25-fe:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8501
+          env:
+            - name: STREAMLIT_SERVER_HEADLESS
+              value: "true"
+            - name: STREAMLIT_SERVER_ENABLECORS
+              value: "false"
+            - name: STREAMLIT_SERVER_PORT
+              value: "8501"
+            - name: STREAMLIT_SERVER_ADDRESS
+              value: "0.0.0.0"
+          volumeMounts:
+            - mountPath: /data/parquet
+              subPath: parquet
+              name: pm25-data
+      volumes:
+        - name: pm25-data
+          persistentVolumeClaim:
+            claimName: aq-data
+
+---
+
+# ==============================================================
+# Service
+# ==============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: pm25-streamlit-service
+spec:
+  type: ClusterIP
+  selector:
+    app: pm25-streamlit
+  ports:
+    - name: ui
+      protocol: TCP
+      port: 80         # exposed internally in the cluster
+      targetPort: 8501 # Streamlit container port
+
+---
+
+# ==============================================================
+# Ingress
+# ==============================================================
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pm25-streamlit-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: pm25.project.ris.bht-berlin.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pm25-streamlit-service
+                port:
+                  name: ui
