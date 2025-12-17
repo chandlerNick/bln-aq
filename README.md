@@ -11,7 +11,7 @@ The project combines:
 
 to generate **continuous air-quality estimates** over the Berlin metropolitan area.
 
-Conceptually, this project builds on techniques explored in [BerlinWeatherTimeSeriesAnalysis](https://github.com/chandlerNick/BerlinWeatherTimeSeriesAnalysis), but extends them into the **spatial domain** and targets **particulate matter rather than meteorological variables**.
+Conceptually, this project builds on techniques explored in [BerlinWeatherTimeSeriesAnalysis](https://github.com/chandlerNick/BerlinWeatherTimeSeriesAnalysis), but extends them into the **spatial domain** and targets **particulate matter rather than meteorological variables**. Additionally, it uses more robust infrastructure and demonstrates ML systems architecture design and implementation.
 
 ---
 
