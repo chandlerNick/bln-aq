@@ -7,6 +7,9 @@ spec:
   containers:
     - name: sds011-ingest
       image: chandlernick/sds011-ingest:latest
+      env:
+      - name: PRIME_DAYS
+        value: "0"
       imagePullPolicy: Always
       command:
         - /bin/sh
