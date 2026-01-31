@@ -5,10 +5,15 @@ import pandas as pd
 from datetime import datetime, timedelta, timezone
 from io import StringIO
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 
+# ======================
+# Config
+# ======================
 RAW_DIR = "/data/raw"
-MAX_WORKERS = 16
-TIMEOUT = 120
+MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "8"))
+TIMEOUT = int(os.environ.get("TIMEOUT", "120"))
+PRIME_DAYS = int(os.environ.get("PRIME_DAYS", "0"))  # 0 = daily, >0 = backfill
 
 SENSOR_IDS = [
     828,1376,1412,1847,2055,2107,2119,2123,2211,2618,2724,3036,3355,3491,3563,3755,
@@ -27,9 +32,10 @@ SENSOR_IDS = [
     88791,88808,89117,89586,89894,90248
 ]
 
-
+# ======================
+# Core Logic
+# ======================
 def download_sensor_csv(date_str: str, sid: int) -> str:
-    """Download one sensor CSV and save to RAW_DIR if available."""
     file_name = f"{date_str}_sds011_sensor_{sid}.csv"
     url = f"https://archive.sensor.community/{date_str}/{file_name}"
     out_path = os.path.join(RAW_DIR, file_name)
@@ -54,18 +60,42 @@ def download_sensor_csv(date_str: str, sid: int) -> str:
 def fetch_for_date(target_date: datetime):
     date_str = target_date.strftime("%Y-%m-%d")
     os.makedirs(RAW_DIR, exist_ok=True)
-    print(f"Fetching SDS011 data for {date_str}")
+
+    print(f"\nFetching SDS011 data for {date_str}")
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(download_sensor_csv, date_str, sid): sid for sid in SENSOR_IDS}
+        futures = {
+            executor.submit(download_sensor_csv, date_str, sid): sid
+            for sid in SENSOR_IDS
+        }
         for i, future in enumerate(as_completed(futures), 1):
-            msg = future.result()
-            print(f"[{i}/{len(SENSOR_IDS)}] {msg}")
+            print(f"[{i}/{len(SENSOR_IDS)}] {future.result()}")
 
 
+# ======================
+# Entry Point
+# ======================
 def main():
-    target_date = datetime.now(timezone.utc) - timedelta(days=1)
-    fetch_for_date(target_date)
+    os.makedirs(RAW_DIR, exist_ok=True)
+
+    print(f"\nINGEST MODE: {'PRIME' if PRIME_DAYS > 0 else 'DAILY'}")
+
+    today = datetime.now(timezone.utc).date()
+
+    if PRIME_DAYS > 0:
+        start_date = today - timedelta(days=PRIME_DAYS)
+        print(f"Priming {PRIME_DAYS} days: {start_date} → {today - timedelta(days=1)}")
+
+        d = start_date
+        while d < today:
+            fetch_for_date(datetime.combine(d, datetime.min.time(), tzinfo=timezone.utc))
+            time.sleep(1)  # small throttle to be polite
+            d += timedelta(days=1)
+
+        print("\nPrime complete.")
+    else:
+        target_date = today - timedelta(days=1)
+        fetch_for_date(datetime.combine(target_date, datetime.min.time(), tzinfo=timezone.utc))
 
 
 if __name__ == "__main__":
