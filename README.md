@@ -24,6 +24,14 @@ Sensor Community -> Ingest -> Aggregate -> Forecast + Interpolate -> Frontend
 
 ---
 
+## Front End
+
+Here is an example of the front end (this was not the primary focus of the project).
+
+![Front End](misc/FrontEnd.png)
+
+---
+
 ## Directory Overview
 
 ### `prototyping/`
